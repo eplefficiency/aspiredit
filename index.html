@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Logo Parallax</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        .parallax-container {
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            perspective: 10px;
+        }
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .background {
+            transform: translateZ(-10px) scale(2);
+        }
+        .foreground {
+            transform: translateZ(-5px) scale(1.5);
+        }
+        .logo {
+            width: 300px;
+            height: auto;
+        }
+        .coming-soon {
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax-container">
+        <div class="parallax-layer background">
+            <img src="logo.png" alt="Company Logo" class="logo">
+        </div>
+        <div class="parallax-layer foreground">
+            <div class="coming-soon">Coming Soon</div>
+        </div>
+    </div>
+
+    <script>
+        const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
+        const comingSoon = document.querySelector('.coming-soon');
+        let colorIndex = 0;
+
+        function changeColor() {
+            comingSoon.style.color = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.length;
+        }
+
+        setInterval(changeColor, 2000); // Change color every 2 seconds
+
+        const container = document.querySelector('.parallax-container');
+        const background = document.querySelector('.background');
+        const foreground = document.querySelector('.foreground');
+
+        container.addEventListener('scroll', () => {
+            const scrollY = container.scrollTop;
+            background.style.transform = `translateZ(-10px) scale(2) translateY(${scrollY * 0.5}px)`;
+            foreground.style.transform = `translateZ(-5px) scale(1.5) translateY(${scrollY * 0.3}px)`;
+        });
+    </script>
+</body>
+</html>
