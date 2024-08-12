@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aspire Ed & IT Solutions LLC</title>
+    <title>Asprire Ed & IT Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <style>
         body, html {
             height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
-            overflow-x: hidden;
+            overflow: hidden;
         }
         .parallax-container {
             height: 100vh;
             overflow-y: auto;
             overflow-x: hidden;
-            perspective: 10px;
+            perspective: 1px;
         }
         .parallax-layer {
             position: absolute;
@@ -24,43 +25,59 @@
             right: 0;
             bottom: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
         .background {
-            transform: translateZ(-10px) scale(2);
+            transform: translateZ(-1px) scale(2);
         }
         .foreground {
-            transform: translateZ(-5px) scale(1.5);
+            transform: translateZ(0);
+        }
+        .logo-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .logo {
-            width: 300px;
-            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
-        .coming-soon {
-            font-size: 4rem;
-            font-weight: bold;
+        .loading-soon {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="parallax-container">
         <div class="parallax-layer background">
-            <img src="aI.png" alt="Company Logo" class="logo">
+            <div class="logo-container">
+                <img src="logo.png" alt="Company Logo" class="logo">
+            </div>
         </div>
         <div class="parallax-layer foreground">
-            <div class="coming-soon">Coming Soon</div>
+            <div class="logo-container">
+                <img src="aI.png" alt="Company Logo" class="logo">
+            </div>
+            <div class="loading-soon">Loading Soon</div>
         </div>
     </div>
 
     <script>
         const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
-        const comingSoon = document.querySelector('.coming-soon');
+        const loadingSoon = document.querySelector('.loading-soon');
         let colorIndex = 0;
 
         function changeColor() {
-            comingSoon.style.color = colors[colorIndex];
+            loadingSoon.style.color = colors[colorIndex];
             colorIndex = (colorIndex + 1) % colors.length;
         }
 
@@ -72,8 +89,8 @@
 
         container.addEventListener('scroll', () => {
             const scrollY = container.scrollTop;
-            background.style.transform = `translateZ(-10px) scale(2) translateY(${scrollY * 0.5}px)`;
-            foreground.style.transform = `translateZ(-5px) scale(1.5) translateY(${scrollY * 0.3}px)`;
+            background.style.transform = `translateZ(-1px) scale(2) translateY(${scrollY * 0.5}px)`;
+            foreground.style.transform = `translateZ(0) translateY(${scrollY * 0.7}px)`;
         });
     </script>
 </body>
